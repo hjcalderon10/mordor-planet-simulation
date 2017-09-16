@@ -1,2 +1,2 @@
-# mordor-planet-simulation
+# mordorPlanetSimulation
 Multi player coop simulation planet.
