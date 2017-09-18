@@ -42,7 +42,7 @@ class App extends Component{
         acciones:resp
       });
     });
-//    this.setTimeover(this.actualizar(),20000);
+    this.setTimeover(this.actualizar(),20000);
   }
 
   componentDidMount(){

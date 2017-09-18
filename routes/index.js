@@ -213,20 +213,6 @@ function operacion(){
 					continuar = false;
 				}
 				
-				console.log(industrias);
-				console.log("comida: " + recursosComida);
-				console.log("bienes: " + recursosBienes);
-				console.log("Vivienda: " + recursosVivienda);
-				console.log("Contaminacion: " + recursosContaminacion);
-				console.log("Salud: " + recursosSalud);
-				console.log("Personas: " + recursosPersonas);
-
-
-				console.log("-------------------------------------------------");
-				console.log("-------------------------------------------------");
-				console.log("-------------------------------------------------");
-				console.log("-------------------------------------------------");
-				console.log("-------------------------------------------------");
 			}, "formulas", "","");
 }, "estado", "nombre", "recursos");
 }, "estado", "nombre", "industrias");
@@ -366,7 +352,28 @@ router.post("/alias", (req,res)=>{
 	db.collection("log").insert({"alias":alias, "evento":"ingreso"});
 })
 
+router.post("/aumento", (req, res)=>{
+	var alias = req.body.alias;
+	var cantidad = req.body.cantidad;
+	var industria = req.body.industria;
 
+	industrias.map((t,i)=>{
+		if(t.nombre_recuros === industria){
+			var tmp = t.cantidad_recurso + cantidad;
+			if (tmp < 0){
+				tmp = cantidad;
+				cantidad = 0;
+			}
+			else{
+				cantidad = tmp;
+			}
+			var evento = "Se modificaron en " + tmp + " los trabajadores de " + industria + ", quedando " + cantidad + "trabajadores";
+			db.collection("log").insert({"alias":alias, "evento":evento});
+			var donde = "recursos." + i + "cantidad_recurso";
+			db.collection("estado").update({"nombre":"industrias"}, {"$set":{donde:cantidad}});
+		}
+	});
+})
 
 
 
