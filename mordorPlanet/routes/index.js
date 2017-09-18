@@ -1,11 +1,12 @@
 var express = require('express');
 var router = express.Router();
 var mongodb = require('mongodb').MongoClient;
-
+var db;
 var url= "mongodb://localhost:27017/mordorPlanet";
 var industrias;
 var recursos;
 var formulas;
+var num=1;
 
 function operacion(){
 	getFromMongo((state)=>{
@@ -85,7 +86,6 @@ function operacion(){
 					recursosPersonas -= recursosPersonas * ((cantidadSalud - recursosSalud)/100);
 				}
 				var desnutricion = recursosComida - (recursosPersonas*cantidadConsumo)/tiempoReproduccion;
-				console.log("desnutricioooon: " + desnutricion);
 				if(desnutricion < 0){
 					recursosComida = 0;
 					recursosPersonas += recursosPersonas * (desnutricion/500);
@@ -176,14 +176,13 @@ function operacion(){
 
 				}
 
+				var estado = db.collection("estado");
 
-				mongodb.connect(url, (err, db) =>{
-					if(err) throw err;
-					var estado = db.collection("estado");
-					estado.update({
-						"nombre":"recursos",
-					},
-					{"$set":
+				estado.update({
+					"nombre":"recursos",
+				},
+				{
+					"$set":
 					{
 						"recursos.0.cantidad_recurso":recursosPersonas,
 						"recursos.1.cantidad_recurso":recursosSalud,
@@ -192,27 +191,27 @@ function operacion(){
 						"recursos.4.cantidad_recurso":recursosComida,
 						"recursos.5.cantidad_recurso":recursosVivienda
 					}
-				}
-				);
-				});
-
-				mongodb.connect(url, (err, db) =>{
-					if(err) throw err;
-					var estado = db.collection("estado");
+				}, (callback=>{
 					estado.update({
 						"nombre":"industrias",
 					},
-					{"$set":
 					{
-						"recursos.0.cantidad_recurso":industriasAlimentos,
-						"recursos.1.cantidad_recurso":industriasIndustria,
-						"recursos.2.cantidad_recurso":industriasInvestigacion,
-						"recursos.3.cantidad_recurso":industriasConstruccion
+						"$set":
+						{
+							"recursos.0.cantidad_recurso":industriasAlimentos,
+							"recursos.1.cantidad_recurso":industriasIndustria,
+							"recursos.2.cantidad_recurso":industriasInvestigacion,
+							"recursos.3.cantidad_recurso":industriasConstruccion
+						}
 					}
-				}
+					);
+				})
 				);
-				});
+				
 
+				if(recursosPersonas > 0){
+					continuar = false;
+				}
 				
 				console.log(industrias);
 				console.log("comida: " + recursosComida);
@@ -232,39 +231,42 @@ function operacion(){
 }, "estado", "nombre", "recursos");
 }, "estado", "nombre", "industrias");
 
-setTimeout(operacion, 5000);
+setTimeout(operacion, 20000);
 }
 
-resetMundo();
-operacion();
+
+openMongo();
 
 
+function openMongo(){
+	mongodb.connect(url, (err, dbs) =>{
+		if(err) 
+		{
+			throw err;
+		}
+		db = dbs;
+		resetMundo();
+		operacion();
+	});
+}
 
 function resetMundo(){
-	mongodb.connect(url, (err, db) =>{
-		if(err) throw err;
-		var estado = db.collection("estado");
-		estado.update({
-			"nombre":"recursos",
-		},
+	var estado = db.collection("estado");
+
+	estado.update({
+		"nombre":"recursos",
+	},
+	{
+		"$set":
 		{
-			"$set":
-			{
-				"recursos.0.cantidad_recurso":100,
-				"recursos.1.cantidad_recurso":60,
-				"recursos.2.cantidad_recurso":0,
-				"recursos.3.cantidad_recurso":0,
-				"recursos.4.cantidad_recurso":400,
-				"recursos.5.cantidad_recurso":20
-			}
+			"recursos.0.cantidad_recurso":100,
+			"recursos.1.cantidad_recurso":60,
+			"recursos.2.cantidad_recurso":0,
+			"recursos.3.cantidad_recurso":0,
+			"recursos.4.cantidad_recurso":400,
+			"recursos.5.cantidad_recurso":20
 		}
-		);
-	});
-
-
-	mongodb.connect(url, (err, db) =>{
-		if(err) throw err;
-		var estado = db.collection("estado");
+	}, (callback=>{
 		estado.update({
 			"nombre":"industrias",
 		},
@@ -278,8 +280,8 @@ function resetMundo(){
 			}
 		}
 		);
-	});
-
+	})
+	);
 
 }
 
@@ -291,18 +293,15 @@ parameter -> Variable que define el atributo a buscar.
 collection -> Nombre de la collection a buscar en la db.
 */
 function getFromMongo(callback, collection, parameter, search){
-	mongodb.connect(url, (err, db)=>{
+	var estado = db.collection(collection);
+	var query = {};
+	if(parameter === "")
+		query= {};
+	else
+		query[parameter] = search;
+	estado.find(query).toArray(function(err, estado){
 		if(err) throw err;
-		var estado = db.collection(collection);
-		var query = {};
-		if(parameter === "")
-			query= {};
-		else
-			query[parameter] = search;
-		estado.find(query).toArray(function(err, estado){
-			if(err) throw err;
-			callback(estado);
-		});
+		callback(estado);
 	});
 }
 
