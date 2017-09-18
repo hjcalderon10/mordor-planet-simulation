@@ -12,7 +12,7 @@ class App extends Component{
   constructor(props){
 
     super(props);
-
+    this.handleLoad = this.handleLoad.bind(this);
     this.state={
       recursos:[],
       acciones:[],
@@ -46,9 +46,13 @@ class App extends Component{
   }
 
   componentDidMount(){
-
-    this.actualizar();
+    window.addEventListener('load', this.handleLoad);
   }
+
+  handleLoad() {
+    this.actualizar();
+ }
+
   bye = (al) => {
     this.setState({entrando: false});
   }
