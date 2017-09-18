@@ -1,6 +1,6 @@
 body, html{
   background:#000;
-  background-image: url("../images/fondo.jpg");
+  background-image: url("%PUBLIC_URL%/images/fondo.jpg");
   width: 90%;
   height: 90%;
   overflow: hidden;
