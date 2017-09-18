@@ -30,17 +30,17 @@ class App extends Component{
   render(){
     return(
       <div>
-        <div>
-        <h1>Estado de Mordor</h1>
-          <SearchBox/>
-        </div>
+      <div>
+      <h1>Estado de Mordor</h1>
+      <SearchBox/>
+      </div>
       <MordorState recursos={this.state.recursos}/>
 
       </div>
 
       );
+    }
   }
-}
 
 
-export default App;
+  export default App;

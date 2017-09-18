@@ -13,10 +13,8 @@ class MordorState extends Component{
 		console.log(this.props);
 		console.log(this.props.recursos);
 		if(this.props.recursos.length !== 0){
-			return this.props.recursos.map(t=>{
-				return t.recursos.map((n,i)=>{
-					return <Estado recursos= {n} key = {i}/>;	
-				});
+			return this.props.recursos.map((t,i)=>{
+				return <Estado recursos= {t} key = {i}/>;
 			});
 		}
 		else{

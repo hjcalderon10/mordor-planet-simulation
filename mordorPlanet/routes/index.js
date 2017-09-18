@@ -311,9 +311,7 @@ router.get('/estadoRecursos', function(req, res) {
 });
 
 router.get('/estadoIndustrias', function(req, res) {
-	getFromMongo((state)=>{
-		res.json(state);
-	},"estado", "nombre", "industrias");
+	res.json(industrias);
 });
 
 router.get('/necesidades', (req, res)=>{
@@ -334,6 +332,7 @@ router.get('/necesidades', (req, res)=>{
 		},"estado", "nombre", "recursos");
 	},"formulas", "nombre", "persona");
 });
+
 
 router.post('/estado', (req, res)=>{
 	var personas = req.body.personas;
