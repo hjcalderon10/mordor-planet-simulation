@@ -1,22 +1,30 @@
 import React, {Component} from "react";
 import PropTypes from "prop-types";
-import Accion from "./Accion.js";
+import "./Stylesheets/Log.css"
 
 class Log extends Component{
 	
 	constructor(props){
 		super(props);
-		console.log(this.props);
 	}
 
 
 	renderAccion(){
 
+		if(this.props.acciones.length !== 0){
+		return this.props.acciones.map((t,i)=>{
+			return (<div><span className="alias">{t.alias}:</span>
+					<span className="mensaje">{t.evento}</span></div>);
+		});
+		}
+		else{
+			return <div></div>;
+		}
 	}
 
 	render(){
 		return(
-		    <div>
+		    <div className="log">
 			    {this.renderAccion()}
 			</div>
 	    );

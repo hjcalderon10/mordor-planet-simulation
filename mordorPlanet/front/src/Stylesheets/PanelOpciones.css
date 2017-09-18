@@ -1,0 +1,41 @@
+/*Panel Industria*/
+.panel#panelIndustria{
+  position: absolute;
+  bottom:0;  
+  right: 0;
+  float: right;
+  width: 40%;
+  height: 15%;
+
+  margin-bottom: 1%; 
+  margin-right: 1%;
+}
+
+.panel .subPanel{
+  display: inline;
+  float: right;
+  width: 20%;
+  height: 100%;
+  border-style:groove;
+  border-color: #0C0C0D;
+  text-align: center;
+
+  background: #0C0C0D;        
+  background: -webkit-linear-gradient(50deg, #0C0C0D, #000);
+  background: -o-linear-gradient(50deg, #0C0C0D, #000); 
+  background: -moz-linear-gradient(50deg, #0C0C0D, #000);
+  background: linear-gradient(50deg, #0C0C0D, #000);
+}
+
+.subPanel:hover{
+    border-color: #17202A;
+}
+
+.subPanel .nombre{
+  margin:0;
+}
+
+.icono{
+  width:70%;
+  heigth:70%;
+}

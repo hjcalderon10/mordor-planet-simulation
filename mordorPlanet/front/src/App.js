@@ -3,6 +3,10 @@ import React, {Component} from "react";
 import Alias from "./Alias.js";
 import Planet from "./Planet.js";
 import Log from "./Log.js";
+import Recursos from "./Recursos.js";
+import Panel from "./Panel.js";
+import PanelOpciones from "./PanelOpciones.js";
+
 
 class App extends Component{
   constructor(props){
@@ -17,8 +21,7 @@ class App extends Component{
     };
   }
 
-
-  componentDidMount(){
+  actualizar(){
     fetch("/estadoRecursos", {method:"GET", headers:{accept:"application/json"}})
     .then((res) =>{
       if (res.ok)
@@ -26,13 +29,26 @@ class App extends Component{
     })
     .then((resp)=>{
       this.setState({
-        /* Esta parte devuelve el estado actual. debería llamarse a cada instante... para mostrar los recursos actuales*/
         recursos:resp
       });
     });
+    fetch("/estadoAcciones", {method:"GET", headers:{accept:"application/json"}})
+    .then((res) =>{
+      if (res.ok)
+        return res.json();
+    })
+    .then((resp)=>{
+      this.setState({
+        acciones:resp
+      });
+    });
+    this.setTimeover(this.actualizar(),20000);
   }
 
+  componentDidMount(){
 
+    this.actualizar();
+  }
   bye = (al) => {
     this.setState({entrando: false});
   }
@@ -41,16 +57,18 @@ class App extends Component{
   render(){
     return(
       <div>
-        {this.state.entrando ? <Alias bye={this.bye} /> : null}
+      {this.state.entrando ? <Alias bye={this.bye} /> : null}
 
-        <Planet/>
+      <Planet/>
 
-        <Log acciones={this.state.acciones} alias={this.state.alias}/>
-
+      <Log acciones={this.state.acciones}/>
+      <Recursos recursos={this.state.recursos}/>
+      <Panel recursos = {this.state.recursos}/>
+      <PanelOpciones/>
       </div>
       );
     }
   }
 
 
-export default App;
+  export default App;

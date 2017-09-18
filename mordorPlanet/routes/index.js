@@ -305,8 +305,29 @@ function getFromMongo(callback, collection, parameter, search){
 	});
 }
 
+function getFromMongoLastRegister(callback, collection, parameter, search){
+	var estado = db.collection(collection);
+	var query = {};
+	if(parameter === "")
+		query= {};
+	else
+		query[parameter] = search;
+	estado.find(query).sort({$natural:-1}).limit(5).toArray(function(err, estado){
+		if(err) throw err;
+		callback(estado);
+	});
+}
+
+
 router.get('/estadoRecursos', function(req, res) {
+	console.log(recursos);
 	res.json(recursos);
+});
+router.get('/estadoAcciones', function(req, res){
+	getFromMongoLastRegister(state=>{
+		console.log(state);
+		res.json(state);
+	}, "log", "", "");
 });
 
 router.get('/estadoIndustrias', function(req, res) {
@@ -340,6 +361,10 @@ router.post('/estado', (req, res)=>{
 
 });
 
+router.post("/alias", (req,res)=>{
+	var alias = req.body.alias;
+	db.collection("log").insert({"alias":alias, "evento":"ingreso"});
+})
 
 
 
