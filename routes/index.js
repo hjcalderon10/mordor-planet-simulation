@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var mongodb = require('mongodb').MongoClient;
 var db;
-var url= "mongodb://localhost:27017/mordorPlanet";
+var url= process.env.PROD_MONGODB;
 var industrias;
 var recursos;
 var formulas;
