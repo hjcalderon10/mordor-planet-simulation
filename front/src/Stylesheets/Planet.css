@@ -42,7 +42,7 @@
   left:-360px;
   -webkit-animation: rotation 30s linear infinite;
   animation: rotation 30s linear infinite;
-  content: "%PUBLIC_URL%/images/earth_copy.jpg";
+  content: url("../images/earth_copy.jpg");
   height:320px;
   background-size:cover;
 }
