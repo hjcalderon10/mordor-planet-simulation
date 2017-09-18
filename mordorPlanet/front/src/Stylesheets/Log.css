@@ -1,0 +1,16 @@
+/*Log*/
+.log{
+  position: absolute;
+  bottom:0;  
+  float: left;
+  width: 40%;
+}
+
+.accion{
+  margin:1%;
+}
+
+.alias{
+  color: #6C3483;
+  width: 20%;
+}

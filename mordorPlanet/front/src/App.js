@@ -1,14 +1,19 @@
 import React, {Component} from "react";
 
-import MordorState from "./MordorState.js";
-import SearchBox from "./SearchBox.js";
-
+import Alias from "./Alias.js";
+import Planet from "./Planet.js";
+import Log from "./Log.js";
 
 class App extends Component{
   constructor(props){
+
     super(props);
+
     this.state={
-      recursos:[]
+      recursos:[],
+      acciones:[],
+      alias:"",
+      entrando:true
     };
   }
 
@@ -27,20 +32,25 @@ class App extends Component{
     });
   }
 
+
+  bye = (al) => {
+    this.setState({entrando: false});
+  }
+
+
   render(){
     return(
       <div>
-      <div>
-      <h1>Estado de Mordor</h1>
-      <SearchBox/>
-      </div>
-      <MordorState recursos={this.state.recursos}/>
+        {this.state.entrando ? <Alias bye={this.bye} /> : null}
+
+        <Planet/>
+
+        <Log acciones={this.state.acciones} alias={this.state.alias}/>
 
       </div>
-
       );
     }
   }
 
 
-  export default App;
+export default App;
