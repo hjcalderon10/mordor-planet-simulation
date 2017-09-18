@@ -8,21 +8,21 @@ class App extends Component{
   constructor(props){
     super(props);
     this.state={
-      estado:[]
+      recursos:[]
     };
   }
 
 
   componentDidMount(){
-    fetch("/estado", {method:"GET", headers:{accept:"application/json"}})
+    fetch("/estadoRecursos", {method:"GET", headers:{accept:"application/json"}})
     .then((res) =>{
       if (res.ok)
         return res.json();
     })
-    .then((estado)=>{
+    .then((resp)=>{
       this.setState({
         /* Esta parte devuelve el estado actual. debería llamarse a cada instante... para mostrar los recursos actuales*/
-        estado:estado
+        recursos:resp
       });
     });
   }
@@ -34,7 +34,7 @@ class App extends Component{
         <h1>Estado de Mordor</h1>
           <SearchBox/>
         </div>
-      <MordorState estado={this.state.estado}/>
+      <MordorState recursos={this.state.recursos}/>
 
       </div>
 
