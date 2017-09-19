@@ -3,3 +3,5 @@ de esta manera evitamos tener un reguero de archivos rodando por todas las carpe
 
 
 Buen uso de React, componentes separados en diferentes classes, usa props. 
+
+Usa arrows functions : => , ES6. 
