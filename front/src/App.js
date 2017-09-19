@@ -21,6 +21,7 @@ class App extends Component{
     };
   }
 
+/*
   actualizar(){
     fetch("/estadoRecursos", {method:"GET", headers:{accept:"application/json"}})
     .then((res) =>{
@@ -31,27 +32,41 @@ class App extends Component{
       this.setState({
         recursos:resp
       });
-      fetch("/estadoAcciones", {method:"GET", headers:{accept:"application/json"}})
-      .then((res) =>{
-        if (res.ok)
-          return res.json();
-      })
-      .then((resp)=>{
-        this.setState({
-          acciones:resp
-        });
-        this.setTimeover(this.actualizar(),20000);
+    });
+    fetch("/estadoAcciones", {method:"GET", headers:{accept:"application/json"}})
+    .then((res) =>{
+      if (res.ok)
+        return res.json();
+    })
+    .then((resp)=>{
+      this.setState({
+        acciones:resp
       });
     });
+    this.setTimeover(this.actualizar(),20000);
   }
-
+*/
   componentDidMount(){
     window.addEventListener('load', this.handleLoad);
   }
 
   handleLoad() {
-    this.actualizar();
-  }
+    Promise.all([fetch("/estadoRecursos", {method:"GET", headers:{accept:"application/json"}}),fetch("/estadoAcciones", {method:"GET", headers:{accept:"application/json"}})]).then(values=>{
+        var estadoRec = values[0];
+        var estadoAcc = values[1];
+        if(estadoRec.ok){
+          estadoRec = estadoRec.json();
+        }
+        if(estadoAcc.ok){
+          estadoAcc = estadoAcc.json();
+        }
+        this.setState({
+          recursos:estadoRec,
+          acciones:estadoAcc
+        });
+        this.setTimeover(this.handleLoad,20000);
+    });
+ }
 
   bye = (al) => {
     this.setState({entrando: false});
