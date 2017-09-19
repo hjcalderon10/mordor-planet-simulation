@@ -45,49 +45,53 @@ class App extends Component{
     });
     this.setTimeover(this.actualizar(),20000);
   }
-*/
+  */
   componentDidMount(){
     window.addEventListener('load', this.handleLoad);
   }
 
   handleLoad() {
-    Promise.all([fetch("/estadoRecursos", {method:"GET", headers:{accept:"application/json"}}),fetch("/estadoAcciones", {method:"GET", headers:{accept:"application/json"}})]).then(values=>{
+    Promise.all([
+      fetch("/estadoRecursos", {method:"GET", headers:{accept:"application/json"}}).then((resp=>{
+        if(resp.ok)
+          return resp.json();
+      }))
+      ,
+      fetch("/estadoAcciones", {method:"GET", headers:{accept:"application/json"}}).then((resp=>{
+        if(resp.ok)
+          return resp.json();
+      }))
+      ]).then(values=>{
         var estadoRec = values[0];
         var estadoAcc = values[1];
-        if(estadoRec.ok){
-          estadoRec = estadoRec.json();
-        }
-        if(estadoAcc.ok){
-          estadoAcc = estadoAcc.json();
-        }
         this.setState({
           recursos:estadoRec,
           acciones:estadoAcc
         });
-        this.setTimeover(this.handleLoad,20000);
-    });
- }
-
-  bye = (al) => {
-    this.setState({entrando: false});
-  }
-
-
-  render(){
-    return(
-      <div>
-      {this.state.entrando ? <Alias bye={this.bye} /> : null}
-
-      <Planet/>
-
-      <Log acciones={this.state.acciones}/>
-      <Recursos recursos={this.state.recursos}/>
-      <Panel recursos = {this.state.recursos}/>
-      <PanelOpciones/>
-      </div>
-      );
+        window.setTimeout(this.handleLoad,20000);
+      });
     }
-  }
+
+    bye = (al) => {
+      this.setState({entrando: false});
+    }
 
 
-  export default App;
+    render(){
+      return(
+        <div>
+        {this.state.entrando ? <Alias bye={this.bye} /> : null}
+
+        <Planet/>
+
+        <Log acciones={this.state.acciones}/>
+        <Recursos recursos={this.state.recursos}/>
+        <Panel recursos = {this.state.recursos}/>
+        <PanelOpciones/>
+        </div>
+        );
+      }
+    }
+
+
+    export default App;
