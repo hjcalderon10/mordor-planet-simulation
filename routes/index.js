@@ -217,7 +217,7 @@ function operacion(){
 }, "estado", "nombre", "recursos");
 }, "estado", "nombre", "industrias");
 
-setTimeout(operacion, 20000);
+setTimeout(operacion, 40000);
 }
 
 
