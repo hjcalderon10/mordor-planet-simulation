@@ -31,18 +31,18 @@ class App extends Component{
       this.setState({
         recursos:resp
       });
-    });
-    fetch("/estadoAcciones", {method:"GET", headers:{accept:"application/json"}})
-    .then((res) =>{
-      if (res.ok)
-        return res.json();
-    })
-    .then((resp)=>{
-      this.setState({
-        acciones:resp
+      fetch("/estadoAcciones", {method:"GET", headers:{accept:"application/json"}})
+      .then((res) =>{
+        if (res.ok)
+          return res.json();
+      })
+      .then((resp)=>{
+        this.setState({
+          acciones:resp
+        });
+        this.setTimeover(this.actualizar(),20000);
       });
     });
-    this.setTimeover(this.actualizar(),20000);
   }
 
   componentDidMount(){
@@ -51,7 +51,7 @@ class App extends Component{
 
   handleLoad() {
     this.actualizar();
- }
+  }
 
   bye = (al) => {
     this.setState({entrando: false});

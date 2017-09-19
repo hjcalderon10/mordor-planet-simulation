@@ -231,7 +231,7 @@ function openMongo(){
 			throw err;
 		}
 		db = dbs;
-		resetMundo();
+		//resetMundo();
 		operacion();
 	});
 }
