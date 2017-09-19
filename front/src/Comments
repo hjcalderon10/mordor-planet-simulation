@@ -1,2 +1,5 @@
 Tienen muchos muchos archivos, seria recomendable organizarlo por carpetas, de tal manera que en una tengan por ejemplo recursos y así,
 de esta manera evitamos tener un reguero de archivos rodando por todas las carpetas y es más organizado llegar a un archivo requerido. 
+
+
+Buen uso de React, componentes separados en diferentes classes, usa props. 
