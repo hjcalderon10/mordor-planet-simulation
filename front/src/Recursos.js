@@ -4,11 +4,6 @@ import "./Stylesheets/Recursos.css";
 
 class Recursos extends Component{
 	
-	constructor(props){
-		super(props);
-	}
-
-
 	renderAccion(){
 
 		if(this.props.recursos.length !== 0){

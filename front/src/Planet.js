@@ -3,10 +3,6 @@ import './Stylesheets/Planet.css';
 
 
 export default class Planet extends Component{
-	
-	constructor(props){
-		super(props);
-	}
     
 	render(){
 		return(

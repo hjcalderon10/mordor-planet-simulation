@@ -3,10 +3,6 @@ import PropTypes from "prop-types";
 import "./Stylesheets/Log.css"
 
 class Log extends Component{
-	
-	constructor(props){
-		super(props);
-	}
 
 
 	renderAccion(){

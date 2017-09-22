@@ -10,7 +10,7 @@ import PanelOpciones from "./PanelOpciones.js";
 
 class App extends Component{
   constructor(props){
-
+    console.log("entra");
     super(props);
     this.handleLoad = this.handleLoad.bind(this);
     this.state={
@@ -76,6 +76,9 @@ class App extends Component{
       this.setState({entrando: false});
     }
 
+    agregarTrabajadores = (numero) =>{
+      console.log(numero);
+    }    
 
     render(){
       return(
@@ -87,7 +90,7 @@ class App extends Component{
         <Log acciones={this.state.acciones}/>
         <Recursos recursos={this.state.recursos}/>
         <Panel recursos = {this.state.recursos}/>
-        <PanelOpciones/>
+        <PanelOpciones agregarTrabajadores={this.agregarTrabajadores}/>
         </div>
         );
       }
