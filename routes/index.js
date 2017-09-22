@@ -40,35 +40,35 @@ function operacion(){
 				var recursosVivienda=recursos[5].cantidad_recurso;
 
 				//Cantidad de alimento que consume cada persona por unidad de tiempo
-				var cantidadConsumo=formulas[0].comida;
+				var cantidadConsumo=formulas[4].comida;
 				//Cantidad de personas que pueden habitar una vivienda.
-				var cantidadPoblacion=formulas[0].vivienda;
+				var cantidadPoblacion=formulas[4].vivienda;
 				//Salud minima antes de que la mortalidad empiece a afectar.
-				var cantidadSalud=formulas[0].salud;
+				var cantidadSalud=formulas[4].salud;
 				//Natalidad basada en relacion a la poblacion
-				var relacionReproduccion=formulas[0].reproduccion.relacion;
+				var relacionReproduccion=formulas[4].reproduccion.relacion;
 				//Unidad de tiempo para efectuar las modificaciones a la poblacion.
-				var tiempoReproduccion=formulas[0].reproduccion.tiempo;
+				var tiempoReproduccion=formulas[4].reproduccion.tiempo;
 				//cantidad de personas necesarias trabajando para producir una unidad de Alimento
-				var cantidadAlimento=formulas[1].cantidad;
+				var cantidadAlimento=formulas[2].cantidad;
 				//Unidad de tiempo necesario para producir una unidad de Alimento.
-				var tiempoAlimento=formulas[1].tiempo;
+				var tiempoAlimento=formulas[2].tiempo;
 				//cantidad de personas necesarias trabajando para producir una unidad de Vivienda
-				var cantidadVivienda=formulas[2].cantidad;
+				var cantidadVivienda=formulas[1].cantidad;
 				//Unidad de tiempo necesario para producir una unidad de Vivienda.
-				var tiempoVivienda=formulas[2].tiempo;
+				var tiempoVivienda=formulas[1].tiempo;
 				//cantidad de personas necesarias trabajando para producir una unidad de Bienes/Contaminacion y
 				//reducir en una unidad la salud.
-				var cantidadIndustria=formulas[3].cantidad;
+				var cantidadIndustria=formulas[0].cantidad;
 				//cantidad de personas necesarias trabajando para producir una unidad de Bienes/Contaminacion y
 				//reducir en una unidad la salud.
-				var tiempoIndustria=formulas[3].tiempo;
+				var tiempoIndustria=formulas[0].tiempo;
 				//cantidad de personas necesarias trabajando para producir una unidad de salud y reducir en una
 				//unidad la contaminacion
-				var cantidadInvestigacion=formulas[4].cantidad;
+				var cantidadInvestigacion=formulas[3].cantidad;
 				//cantidad de personas necesarias trabajando para producir una unidad de salud y reducir en una
 				//unidad la contaminacion
-				var tiempoInvestigacion=formulas[4].tiempo;
+				var tiempoInvestigacion=formulas[3].tiempo;
 
 				recursosComida += ((industriasAlimentos/cantidadAlimento)/tiempoAlimento);
 				recursosBienes += ((industriasIndustria/cantidadIndustria)/tiempoIndustria);
