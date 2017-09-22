@@ -25,10 +25,14 @@ class PanelAgregar extends Component{
 		    <div className="modalAgregar">
 		        <div className="modalconent2">
 		            <h4>{this.props.nombre}</h4>
-                    <span className="boton"><i className="fa fa-plus" aria-hidden="true"></i></span>
-                    <input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' placeholder="1"  onChange={this.handleChange}/>
-                    <span className="boton"><i className="fa fa-minus" aria-hidden="true"></i></span>
-                    <button onClick={this.cerrar} id="botonAgregar">OK</button>
+		            <div>
+		                <span className="boton"><i className="fa fa-minus" aria-hidden="true"></i></span>
+                        <input type="text" onkeypress='return event.charCode >= 48 && event.charCode <= 57' placeholder="number"  onChange={this.handleChange}/>
+                        <span className="boton"><i className="fa fa-plus" aria-hidden="true"></i></span>
+		            </div>
+		            <div>
+                        <button onClick={this.cerrar} id="botonAgregar">OK</button>		            
+		            </div>
 		        </div>   	
 			</div>
 	    );

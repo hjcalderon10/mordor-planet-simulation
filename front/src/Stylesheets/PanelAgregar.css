@@ -22,3 +22,14 @@
   padding-bottom: 20px;
   text-align: center;
 }
+
+#botonAgregar{
+  border-radius: 25px;
+  border: none;
+  background-color: #2E86C1;
+  color: white;
+}
+
+#botonAgregar:focus{
+  outline: none;
+}

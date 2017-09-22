@@ -16,7 +16,7 @@ export default class Alias extends Component{
 	}
 
 	close = () => {
-		this.props.bye();
+		this.props.bye(this.state.alias);
 		fetch("/alias", {method:"POST", headers:{accept:"application/json",'Content-Type': 'application/json'},
 						body: JSON.stringify({alias:this.state.alias})})
 		.then(function(response){

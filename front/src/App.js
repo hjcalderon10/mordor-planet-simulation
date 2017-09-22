@@ -73,11 +73,14 @@ class App extends Component{
     }
 
     bye = (al) => {
-      this.setState({entrando: false});
+      this.setState({entrando: false,alias:al});
     }
 
-    agregarTrabajadores = (numero) =>{
-      console.log(numero);
+    agregarTrabajadores = (numero,nombre) =>{
+      fetch("/aumento", {method:"POST", headers:{accept:"application/json",'Content-Type': 'application/json'},
+            body: JSON.stringify({alias:this.state.alias,cantidad:numero,industria:nombre})})
+           .then(function(response){      
+      });
     }    
 
     render(){

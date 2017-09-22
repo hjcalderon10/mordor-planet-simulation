@@ -31,8 +31,8 @@ class PanelOpciones extends Component{
         };
     }
 
-    agregarTrabajadores = (numero) =>{
-        this.props.agregarTrabajadores(numero);
+    agregarTrabajadores = (numero, nombre) =>{
+        this.props.agregarTrabajadores(numero, nombre);
     }    
 
 	renderOpciones(){

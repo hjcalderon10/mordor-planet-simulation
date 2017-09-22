@@ -353,6 +353,8 @@ router.post("/alias", (req,res)=>{
 })
 
 router.post("/aumento", (req, res)=>{
+	console.log(req);
+
 	var alias = req.body.alias;
 	var cantidad = req.body.cantidad;
 	var industria = req.body.industria;
